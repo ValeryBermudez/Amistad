@@ -33,33 +33,57 @@ document.getElementById('secretoForm').addEventListener('submit', function(event
     const apellido = document.getElementById('apellido').value.trim();
     const nombreCompleto = `${nombre} ${apellido}`;
     
-    console.log("Nombre completo ingresado:", nombreCompleto); // Depuración
-    
     const nombreNormalizado = nombreCompleto.toLowerCase();
     
     const amigoIndex = amigos.map(amigo => amigo.toLowerCase()).indexOf(nombreNormalizado);
     
-    console.log("Índice del amigo en la lista:", amigoIndex); // Depuración
-    
     if (amigoIndex !== -1) {
-        // Amigo encontrado, asignar amigo secreto
-        let amigosDisponibles = amigos.slice();
-        amigosDisponibles.splice(amigoIndex, 1); // Elimina al usuario actual de la lista
-        amigosDisponibles = amigosDisponibles.sort(() => 0.5 - Math.random()); // Barajar la lista
+        // Verifica si ya hay un resultado almacenado en localStorage
+        const resultadoAlmacenado = localStorage.getItem(`amigoSecreto_${nombreNormalizado}`);
         
-        const amigoSecreto = amigosDisponibles[0]; // Asigna el primer amigo disponible
-        
-        const mensaje = mensajes[Math.floor(Math.random() * mensajes.length)];
-        
-        console.log("Amigo secreto asignado:", amigoSecreto); // Depuración
-        console.log("Mensaje:", mensaje); // Depuración
-        
-        // Mostrar el resultado en la misma página
-        document.getElementById('nombreResultado').textContent = `Eres ${nombreCompleto}`;
-        document.getElementById('amigoSecreto').textContent = `Tu amigo secreto es: ${amigoSecreto}`;
-        document.getElementById('mensaje').textContent = mensaje;
-        document.getElementById('resultado').style.display = 'block'; // Mostrar el resultado
+        if (resultadoAlmacenado) {
+            // Mostrar el resultado almacenado
+            const [amigoSecreto, mensaje] = JSON.parse(resultadoAlmacenado);
+            mostrarResultado(nombreCompleto, amigoSecreto, mensaje);
+        } else {
+            // Amigo encontrado, asignar amigo secreto
+            let amigosDisponibles = amigos.slice();
+            amigosDisponibles.splice(amigoIndex, 1); // Elimina al usuario actual de la lista
+            amigosDisponibles = amigosDisponibles.sort(() => 0.5 - Math.random()); // Barajar la lista
+            
+            const amigoSecreto = amigosDisponibles[0]; // Asigna el primer amigo disponible
+            const mensaje = mensajes[Math.floor(Math.random() * mensajes.length)];
+            
+            // Guardar el resultado en localStorage
+            localStorage.setItem(`amigoSecreto_${nombreNormalizado}`, JSON.stringify([amigoSecreto, mensaje]));
+            
+            // Mostrar el resultado
+            mostrarResultado(nombreCompleto, amigoSecreto, mensaje);
+        }
     } else {
         alert("No estás registrado.");
+    }
+});
+
+// Función para mostrar el resultado
+function mostrarResultado(nombreCompleto, amigoSecreto, mensaje) {
+    document.getElementById('nombreResultado').textContent = `Eres ${nombreCompleto}`;
+    document.getElementById('amigoSecreto').textContent = `Tu amigo secreto es: ${amigoSecreto}`;
+    document.getElementById('mensaje').textContent = mensaje;
+    document.getElementById('resultado').style.display = 'block'; // Mostrar el resultado
+}
+
+// Mostrar el resultado almacenado si está disponible
+document.addEventListener('DOMContentLoaded', function() {
+    const nombre = document.getElementById('nombre').value.trim();
+    const apellido = document.getElementById('apellido').value.trim();
+    const nombreCompleto = `${nombre} ${apellido}`;
+    
+    const nombreNormalizado = nombreCompleto.toLowerCase();
+    const resultadoAlmacenado = localStorage.getItem(`amigoSecreto_${nombreNormalizado}`);
+    
+    if (resultadoAlmacenado) {
+        const [amigoSecreto, mensaje] = JSON.parse(resultadoAlmacenado);
+        mostrarResultado(nombreCompleto, amigoSecreto, mensaje);
     }
 });
