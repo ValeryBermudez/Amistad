@@ -3,31 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Amigo Secreto</title>
+    <title>Registro de Amigo Secreto</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Registro Amigo Secreto</h1>
+        <h1>Registro para el Amigo Secreto</h1>
         <form id="registroForm">
-            <p>Por favor, completa tus datos para el sorteo del Amigo Secreto.</p>
-            <label for="nombre">Primer Nombre:</label>
+            <p>Por favor ingresa tu nombre y tus gustos y disgustos para el juego.</p>
+            <br>
             <input type="text" id="nombre" placeholder="Primer Nombre" required>
-
-            <label for="apellido">Primer Apellido:</label>
             <input type="text" id="apellido" placeholder="Primer Apellido" required>
-
-            <label for="gustos">Cosas que te gustan:</label>
-            <textarea id="gustos" placeholder="Ejemplo: Chocolate, Libros..." required></textarea>
-
-            <label for="disgustos">Cosas que no te gustan:</label>
-            <textarea id="disgustos" placeholder="Ejemplo: Café, Películas de terror..." required></textarea>
-
+            
+            <textarea id="gustos" placeholder="Cosas que te gustan (ej. chocolate, libros, etc.)" required></textarea>
+            <textarea id="disgustos" placeholder="Cosas que no te gustan (ej. café, películas de terror, etc.)" required></textarea>
+            
             <button type="submit">Registrar</button>
         </form>
         <div id="resultado" style="display:none;">
-            <h2>Registro Completado</h2>
-            <p id="mensajeResultado"></p>
+            <h2 id="nombreResultado"></h2>
+            <p id="gustosResultado"></p>
+            <p id="disgustosResultado"></p>
         </div>
     </div>
     <script src="script.js"></script>
