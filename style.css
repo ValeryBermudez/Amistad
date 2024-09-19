@@ -20,13 +20,12 @@ body {
     border-radius: 10px;
 }
 
-
 h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
 }
 
-input, button {
+input, textarea, button {
     padding: 10px;
     margin: 10px 0;
     font-size: 1.2em;
@@ -35,6 +34,13 @@ input, button {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 5px;
+    border: none;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
 }
 
 button {
