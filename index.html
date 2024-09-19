@@ -8,24 +8,23 @@
 </head>
 <body>
     <div class="container">
-        <h1>Registro para el Amigo Secreto</h1>
+        <h1>Registro de Amigo Secreto</h1>
         <form id="registroForm">
-            <p>Por favor ingresa tu nombre y tus gustos y disgustos para el juego.</p>
-            <br>
-            <input type="text" id="nombre" placeholder="Primer Nombre" required>
-            <input type="text" id="apellido" placeholder="Primer Apellido" required>
-            
-            <textarea id="gustos" placeholder="Cosas que te gustan (ej. chocolate, libros, etc.)" required></textarea>
-            <textarea id="disgustos" placeholder="Cosas que no te gustan (ej. café, películas de terror, etc.)" required></textarea>
-            
+            <p>Por favor ingresa los datos correctamente para que no hayan confusiones :p.</p>
+            <input type="text" id="nombre" placeholder="Como te llamas" required>
+            <textarea id="gustos" placeholder="Cosas que te gustan" required></textarea>
+            <textarea id="noGustos" placeholder="Cosas que no te gustan" required></textarea>
             <button type="submit">Registrar</button>
         </form>
         <div id="resultado" style="display:none;">
             <h2 id="nombreResultado"></h2>
             <p id="gustosResultado"></p>
-            <p id="disgustosResultado"></p>
+            <p id="noGustosResultado"></p>
         </div>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js"></script>
+    <script src="firebase-config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
