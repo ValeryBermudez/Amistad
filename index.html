@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vamos a jugar Amigo Secreto</title>
+    <title>Registro Amigo Secreto</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Vamos a jugar Amigo Secreto</h1>
-        <form id="secretoForm">
-            <p>Por favor ingresa los datos correctamente para que no hayan confusiones :p.</p>
-            <br>
-            <p>Si dice primer nombre, ponlo como es en tu documento de identidad. ¡Gracias!</p>
+        <h1>Registro Amigo Secreto</h1>
+        <form id="registroForm">
+            <p>Por favor, completa tus datos para el sorteo del Amigo Secreto.</p>
+            <label for="nombre">Primer Nombre:</label>
             <input type="text" id="nombre" placeholder="Primer Nombre" required>
+
+            <label for="apellido">Primer Apellido:</label>
             <input type="text" id="apellido" placeholder="Primer Apellido" required>
-            <!-- Agregamos el ID 'submitBtn' al botón -->
-            <button id="submitBtn" type="submit">Descubrir Amigo Secreto</button>
+
+            <label for="gustos">Cosas que te gustan:</label>
+            <textarea id="gustos" placeholder="Ejemplo: Chocolate, Libros..." required></textarea>
+
+            <label for="disgustos">Cosas que no te gustan:</label>
+            <textarea id="disgustos" placeholder="Ejemplo: Café, Películas de terror..." required></textarea>
+
+            <button type="submit">Registrar</button>
         </form>
         <div id="resultado" style="display:none;">
-            <h2 id="nombreResultado"></h2>
-            <p id="amigoSecreto"></p>
-            <p id="mensaje"></p>
+            <h2>Registro Completado</h2>
+            <p id="mensajeResultado"></p>
         </div>
     </div>
     <script src="script.js"></script>
