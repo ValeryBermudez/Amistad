@@ -1,6 +1,4 @@
-// script.js
-
-import { db } from './firebase-config.js'; // Importa la instancia de la base de datos desde firebase-config
+import { db } from './firebase-config.js';
 import { ref, set, get } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
 
 // Función para mostrar el resultado en la misma página
@@ -58,4 +56,3 @@ function leerDatos() {
 
 // Llamar a la función para leer datos (opcional)
 leerDatos();
-

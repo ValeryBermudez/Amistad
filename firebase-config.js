@@ -1,9 +1,8 @@
-// firebase-config.js
-
+// Importa las funciones que necesitas del SDK de Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
-import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
 
-// Configuración de Firebase
+// Tu configuración de Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCrifdi1gDTMMQ6_hza-qpSBGHFZB4ntLw",
   authDomain: "amigosecreto-cdc68.firebaseapp.com",
