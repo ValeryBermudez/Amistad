@@ -25,7 +25,7 @@ const mensajes = [
     "La amistad contigo es un regalo que valoro siempre."
 ];
 
-// Manejo del formulario en index.html
+// Manejo del formulario
 document.getElementById('secretoForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
@@ -42,9 +42,7 @@ document.getElementById('secretoForm').addEventListener('submit', function(event
         const resultadoAlmacenado = localStorage.getItem(`amigoSecreto_${nombreNormalizado}`);
         
         if (resultadoAlmacenado) {
-            // Mostrar el resultado almacenado
-            const [amigoSecreto, mensaje] = JSON.parse(resultadoAlmacenado);
-            mostrarResultado(nombreCompleto, amigoSecreto, mensaje);
+            alert("Ya has descubierto tu amigo secreto. No puedes intentarlo de nuevo.");
         } else {
             // Amigo encontrado, asignar amigo secreto
             let amigosDisponibles = amigos.slice();
@@ -55,7 +53,11 @@ document.getElementById('secretoForm').addEventListener('submit', function(event
             const mensaje = mensajes[Math.floor(Math.random() * mensajes.length)];
             
             // Guardar el resultado en localStorage
-            localStorage.setItem(`amigoSecreto_${nombreNormalizado}`, JSON.stringify([amigoSecreto, mensaje]));
+            localStorage.setItem(`amigoSecreto_${nombreNormalizado}`, JSON.stringify({
+                nombreCompleto,
+                amigoSecreto,
+                mensaje
+            }));
             
             // Mostrar el resultado
             mostrarResultado(nombreCompleto, amigoSecreto, mensaje);
@@ -65,15 +67,15 @@ document.getElementById('secretoForm').addEventListener('submit', function(event
     }
 });
 
-// Función para mostrar el resultado
+// Mostrar el resultado en la misma página
 function mostrarResultado(nombreCompleto, amigoSecreto, mensaje) {
+    document.getElementById('resultado').style.display = 'block';
     document.getElementById('nombreResultado').textContent = `Eres ${nombreCompleto}`;
     document.getElementById('amigoSecreto').textContent = `Tu amigo secreto es: ${amigoSecreto}`;
     document.getElementById('mensaje').textContent = mensaje;
-    document.getElementById('resultado').style.display = 'block'; // Mostrar el resultado
 }
 
-// Mostrar el resultado almacenado si está disponible
+// Al cargar la página, verificar si ya hay un resultado almacenado
 document.addEventListener('DOMContentLoaded', function() {
     const nombre = document.getElementById('nombre').value.trim();
     const apellido = document.getElementById('apellido').value.trim();
@@ -83,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultadoAlmacenado = localStorage.getItem(`amigoSecreto_${nombreNormalizado}`);
     
     if (resultadoAlmacenado) {
-        const [amigoSecreto, mensaje] = JSON.parse(resultadoAlmacenado);
+        const { amigoSecreto, mensaje } = JSON.parse(resultadoAlmacenado);
         mostrarResultado(nombreCompleto, amigoSecreto, mensaje);
     }
 });
