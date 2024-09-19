@@ -1,3 +1,14 @@
+const currentVersion = '1.1.0'; // Cambia este número con cada nueva subida
+
+// Verifica la versión almacenada
+const savedVersion = localStorage.getItem('version');
+
+// Si la versión almacenada es diferente, limpiar el localStorage
+if (savedVersion !== currentVersion) {
+    localStorage.clear(); // Limpiar todo el localStorage
+    localStorage.setItem('version', currentVersion); // Guardar la nueva versión
+}
+
 // Lista de amigos
 const amigos = [
     "Arcesio Espitia",
