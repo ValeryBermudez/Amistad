@@ -10,18 +10,18 @@
     <div class="container">
         <h1>Vamos a jugar Amigo Secreto</h1>
         <form id="secretoForm">
-            <h4>TIENES SOLO 1 OPORTUNIDAD</h4>
             <p>Por favor ingresa los datos correctamente para que no hayan confusiones :p.</p>
-            <p>Tomale una captura de pantalla para estar seguros. Tenkiu</p>
+            <br>
+            <p>Si dice primer nombre, ponlo como es en tu documento de identidad. ¡Gracias!</p>
             <input type="text" id="nombre" placeholder="Primer Nombre" required>
             <input type="text" id="apellido" placeholder="Primer Apellido" required>
-            <button type="submit">Descubrir Amigo Secreto</button>
+            <!-- Agregamos el ID 'submitBtn' al botón -->
+            <button id="submitBtn" type="submit">Descubrir Amigo Secreto</button>
         </form>
-        <div id="resultado" style="display: none;">
-            <h1 id="nombreResultado"></h1>
+        <div id="resultado" style="display:none;">
+            <h2 id="nombreResultado"></h2>
             <p id="amigoSecreto"></p>
             <p id="mensaje"></p>
-            <h1>Feliz Amor y Amistad</h1>
         </div>
     </div>
     <script src="script.js"></script>
