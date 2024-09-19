@@ -25,6 +25,15 @@ const mensajes = [
     "La amistad contigo es un regalo que valoro siempre."
 ];
 
+// Función para normalizar los nombres (elimina tildes, mayúsculas y caracteres especiales)
+function normalizarTexto(texto) {
+    return texto
+        .normalize('NFD') // Normaliza y separa los caracteres con tildes
+        .replace(/[\u0300-\u036f]/g, '') // Elimina las tildes
+        .toLowerCase()
+        .replace(/[^a-z\s]/g, ''); // Elimina caracteres especiales, excepto letras y espacios
+}
+
 // Manejo del formulario
 document.getElementById('secretoForm').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -33,9 +42,9 @@ document.getElementById('secretoForm').addEventListener('submit', function(event
     const apellido = document.getElementById('apellido').value.trim();
     const nombreCompleto = `${nombre} ${apellido}`;
     
-    const nombreNormalizado = nombreCompleto.toLowerCase();
+    const nombreNormalizado = normalizarTexto(nombreCompleto);
     
-    const amigoIndex = amigos.map(amigo => amigo.toLowerCase()).indexOf(nombreNormalizado);
+    const amigoIndex = amigos.map(amigo => normalizarTexto(amigo)).indexOf(nombreNormalizado);
     
     if (amigoIndex !== -1) {
         // Verifica si ya hay un resultado almacenado en localStorage
@@ -61,13 +70,16 @@ document.getElementById('secretoForm').addEventListener('submit', function(event
             
             // Mostrar el resultado
             mostrarResultado(nombreCompleto, amigoSecreto, mensaje);
+            
+            // Deshabilitar el botón para evitar nuevos intentos
+            document.getElementById('submitBtn').disabled = true;
         }
     } else {
-        alert("No estás registrado.");
+        alert("No estás registrado o ingresaste mal tu nombre.");
     }
 });
 
-// Mostrar el resultado en la misma página
+// Función para mostrar el resultado en la misma página
 function mostrarResultado(nombreCompleto, amigoSecreto, mensaje) {
     document.getElementById('resultado').style.display = 'block';
     document.getElementById('nombreResultado').textContent = `Eres ${nombreCompleto}`;
@@ -81,11 +93,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const apellido = document.getElementById('apellido').value.trim();
     const nombreCompleto = `${nombre} ${apellido}`;
     
-    const nombreNormalizado = nombreCompleto.toLowerCase();
+    const nombreNormalizado = normalizarTexto(nombreCompleto);
     const resultadoAlmacenado = localStorage.getItem(`amigoSecreto_${nombreNormalizado}`);
     
     if (resultadoAlmacenado) {
         const { amigoSecreto, mensaje } = JSON.parse(resultadoAlmacenado);
         mostrarResultado(nombreCompleto, amigoSecreto, mensaje);
+        // Deshabilitar el botón para que no intente de nuevo
+        document.getElementById('submitBtn').disabled = true;
     }
 });
